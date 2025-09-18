@@ -55,7 +55,7 @@
         // Функция чтобы стриггерить ObserveTextNodesAddition - но не дать язык, т.е. пустой нод.
         function addEmptyTextNode() {
             const newDiv = document.createElement("div");
-            newDiv.textContent = "";
+            newDiv.textContent = "<p>Some english text here to test whether we'll execute a text addition or not</p>";
             document.body.appendChild(newDiv);
         }
 
