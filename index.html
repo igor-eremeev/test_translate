@@ -74,6 +74,8 @@
             const newDiv = document.createElement("script");
             document.body.appendChild(newDiv);
             newDiv.innerText = "function A2BigFunctionWithAtLeast16CharsTextSample() { console.log(\"Hello world!\"); }";
+
+            forceReflow();
         }
 
         // Функция для загрузки текста через AJAX
@@ -115,6 +117,12 @@
 
             // Отправляем запрос
             xhr.send();
+        }
+
+        function forceReflow() {
+            document.body.style.display = 'none';
+            document.body.offsetHeight; // Чтение этого свойства форсирует reflow
+            document.body.style.display = '';
         }
 
         // Запасная функция с локальным текстом
