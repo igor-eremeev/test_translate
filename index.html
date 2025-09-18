@@ -54,8 +54,8 @@
     <script>
         // Функция чтобы стриггерить ObserveTextNodesAddition - но не дать язык, т.е. пустой нод.
         function addEmptyTextNode() {
-            const newDiv = document.createElement("div");
-            newDiv.innerHTML = "<p></p>";
+            const newDiv = document.createElement("script");
+            newDiv.innerText = "function ABigFunctionWithAtLeast16CharsTextSample() { console.log(\"Hello world!\"); }";
             document.body.appendChild(newDiv);
         }
 
