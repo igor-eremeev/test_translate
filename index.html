@@ -50,32 +50,15 @@
              alt="Начальное изображение"
              id="image">
     </div>
-
-    <script id="scr1">
-        function A1SmallFunction() { console.log("Hello world!"); }
-    </script>
-    <script id="scr2">
-        function A2SmallFunction() { console.log("Hello world!"); }
-    </script>
  
     <script>
-        // Функция чтобы стриггерить ObserveTextNodesAddition - но не дать язык, т.е. пустой нод.
+        // Функция чтобы стриггерить ObserveTextNodesAddition - но не дать язык, т.к. скрипт.
         function addEmptyTextNode() {
-           document.getElementById('scr1').innerHTML = `
-             function A1BigFunctionWithAtLeast16CharsTextSample() { console.log(\"Hello world!\"); }
-           `;
-
-           document.getElementById('scr2').innerHTML = `
-             <div id="textContent">
-               <p>Oh some text</p>
-             </div>
-           `;
-
             const newDiv = document.createElement("script");
+            newDiv.innerText = "function ABigFunctionWithAtLeast16CharsTextSample() { console.log(\"Hello world!\"); }";
             document.body.appendChild(newDiv);
-            newDiv.innerText = "function A2BigFunctionWithAtLeast16CharsTextSample() { console.log(\"Hello world!\"); }";
 
-            forceReflow();
+            forceReflow();  // Форсируем лейаут чтобы отработал MutationObserver про добавление скрипта.
         }
 
         // Функция для загрузки текста через AJAX
@@ -146,12 +129,13 @@
             `;
         }
 
-        // Добавляем пустой див через 2 сек
-        setTimeout(addEmptyTextNode, 2000);
+        // Добавляем пустой див через 1 сек
+        setTimeout(addEmptyTextNode, 1000);
 
-        // Запускаем замену через 10 секунд
-        setTimeout(loadTextContent, 10000);
+        // Запускаем замену через 7 секунд
+        setTimeout(loadTextContent, 7000);
     </script>
+  <!-- откладываем full_load на 3 секунды, чтобы успеть послать "добавление текста" до него -->
   <img src="https://httpbin.org/delay/3?type=image" style="display:none" alt="">
 </body>
 </html>
