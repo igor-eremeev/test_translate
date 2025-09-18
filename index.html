@@ -52,11 +52,15 @@
     </div>
 
     <script>
+        // Функция чтобы стриггерить ObserveTextNodesAddition - но не дать язык, т.е. пустой нод.
+        function addEmptyTextNode() {
+            const newDiv = document.createElement("div");
+            newDiv.textContent = "";
+            document.body.appendChild(newDiv);
+        }
+
         // Функция для загрузки текста через AJAX
         function loadTextContent() {
-            // Показываем индикатор загрузки
-            // document.getElementById('content').innerHTML = '<p class="loading">Загрузка текста...</p>';
-
             // Создаем AJAX запрос
             const xhr = new XMLHttpRequest();
 
@@ -115,6 +119,14 @@
                     <p><small>Текст загружен через ${new Date().toLocaleTimeString()}</small></p>
                 </div>
             `;
+        }
+
+        // Добавляем пустой див через 1.5 сек
+        setTimeout(addEmptyTextNode, 1500);
+
+        // Откладываем фулл-лоад на 3 сек
+        document.addEventListener("DOMContentLoaded", function () {
+           fetch('https://httpbin.org/delay/3');
         }
 
         // Запускаем замену через 5 секунд
